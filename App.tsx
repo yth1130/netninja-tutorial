@@ -1,21 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
     // const [name, setName] = useState('Taehun');
     // const [age, setAge] = useState('30');
     const [people, setPeople] = useState([
-        { name: 'Taehun',key: '1' },
-        { name: 'Mario', key: '2' },
-        { name: 'Luigi', key: '3' },
-        { name: 'Yoshi', key: '4' },
-        { name: 'Peach', key: '5' },
-        { name: 'Toad', key: '6' },
-        { name: 'Bowser', key: '7' },
-        { name: 'Bowser', key: '8' },
-        { name: 'Bowser', key: '9' },
-        { name: 'Bowser', key: '10' },
+        { name: 'Taehun',id: '1' },
+        { name: 'Mario', id: '2' },
+        { name: 'Luigi', id: '3' },
+        { name: 'Yoshi', id: '4' },
+        { name: 'Peach', id: '5' },
+        { name: 'Toad',  id: '6' },
+        { name: 'Bowse', id: '7' },
+        { name: 'Bowse', id: '8' },
+        { name: 'Bowse', id: '9' },
+        { name: 'Bowse', id: '10' },
     ]);
 
     // const clickHandler = () => {
@@ -25,7 +25,15 @@ export default function App() {
     
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <FlatList
+                numColumns={2}
+                keyExtractor={(item) => item.id}
+                data={people}
+                renderItem={({ item }) => (
+                    <Text style={styles.item}>{item.name}</Text>
+                )}
+            />
+            {/* <ScrollView>
                 {people.map((item)=>{
                     return (
                         <View key={item.key}>
@@ -33,7 +41,7 @@ export default function App() {
                         </View>
                     )
                 })}
-            </ScrollView>
+            </ScrollView> */}
         </View>
     );
 }
@@ -62,5 +70,7 @@ const styles = StyleSheet.create({
         padding:30,
         backgroundColor:'pink',
         fontSize:24,
+        marginHorizontal:10,
+        
     },
 });
