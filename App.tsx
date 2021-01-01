@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
     // const [name, setName] = useState('Taehun');
@@ -22,6 +22,12 @@ export default function App() {
     //     setName('hoho');
     //     // setPerson({ name: 'Luige', age: 35 });
     // }
+    const pressHandler = (id:string) => {
+        console.log(id);
+        setPeople((prevPeople)=> {
+            return prevPeople.filter(person => person.id != id); //배열의 아이템 각각에 필터안의 함수의 결과가 true인 것만 남긴다.
+        })
+    }
     
     return (
         <View style={styles.container}>
@@ -30,11 +36,13 @@ export default function App() {
                 keyExtractor={(item) => item.id}
                 data={people}
                 renderItem={({ item }) => (
-                    <Text style={styles.item}>{item.name}</Text>
+                    <TouchableOpacity onPress={()=> pressHandler(item.id)}>
+                        <Text style={styles.item}>{item.name}</Text>
+                    </TouchableOpacity>
                 )}
             />
             {/* <ScrollView>
-                {people.map((item)=>{
+                {people.map((item)=>{ //map은 배열의 아이템각각에 맵안의 함수를 수행한 결과들을 다시 배열에 담아 반환.
                     return (
                         <View key={item.key}>
                             <Text style={styles.item}>{item.name}</Text>
