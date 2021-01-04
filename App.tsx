@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Header from './assets/scripts/Header';
+import TodoItem from './assets/scripts/TodoItem';
 
 export default function App() {
 
@@ -9,7 +10,17 @@ export default function App() {
         { key: '1', text: 'buy coffee' },
         { key: '2', text: 'create an app' },
         { key: '3', text: 'play on the switch' },
+        { key: '4', text: 'play on the switch' },
+        { key: '5', text: 'play on the switch' },
+        { key: '6', text: 'play on the switch' },
     ]);
+
+    const pressHandler = (key:string) => {
+        console.log("Press");
+        setTodos((prevTodos) => {
+            return prevTodos.filter(todo=>todo.key != key);
+        });
+    }
     
     return (
         <View style={styles.container}>
@@ -20,7 +31,7 @@ export default function App() {
                     <FlatList 
                         data={todos}
                         renderItem={({item})=>(
-                            <Text>{item.text}</Text>
+                            <TodoItem item={item} pressHandler={pressHandler}/>
                         )}
                     />
                 </View>
