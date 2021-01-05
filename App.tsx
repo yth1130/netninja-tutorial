@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Alert, Button, FlatList, Keyboard, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import AddTodo from './assets/scripts/AddTodo';
 import Header from './assets/scripts/Header';
+import Sandbox from './assets/scripts/Sandbox';
 import TodoItem from './assets/scripts/TodoItem';
 
 export default function App() {
@@ -41,9 +42,10 @@ export default function App() {
     }
     
     return (
+        // <Sandbox />
         <TouchableWithoutFeedback onPress={()=>{
             console.log('dismissed keyboard');
-            Keyboard.dismiss();
+            Keyboard.dismiss(); 
         }}
         >
             <View style={styles.container}>
@@ -70,9 +72,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     content: {
+        flex: 1, //이걸 함으로써 자식의 크기에 따라 크기가 바뀌지 않고 부모의 비율로 크기를 갖는다..?
         padding:40,
+        backgroundColor: 'pink',
     },
     list: {
+        flex:1, //얘도 마찬가지.
         marginTop:20,
+        backgroundColor: 'yellow',
     },
 });
