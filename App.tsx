@@ -74,11 +74,11 @@ const styles = StyleSheet.create({
     content: {
         flex: 1, //이걸 함으로써 자식의 크기에 따라 크기가 바뀌지 않고 부모의 비율로 크기를 갖는다..?
         padding:40,
-        backgroundColor: 'pink',
+        // backgroundColor: 'pink',
     },
     list: {
         flex:1, //얘도 마찬가지.
         marginTop:20,
-        backgroundColor: 'yellow',
+        // backgroundColor: 'yellow',
     },
 });
