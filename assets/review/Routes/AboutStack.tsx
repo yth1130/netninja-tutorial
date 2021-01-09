@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack'
 
 import About from '../screens/About'
@@ -10,6 +11,7 @@ const screens = {
         navigationOptions: ({ navigation }: any) => {
             return {
                 headerTitle: () => <Header navigation={navigation} title='About GameZone'/>,
+                headerBackground: () => <Image source={require('../images/game_bg.png')} style={{height:'100%'}}/>,
             }
         }
     },
