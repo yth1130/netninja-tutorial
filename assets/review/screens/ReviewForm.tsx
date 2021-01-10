@@ -4,13 +4,15 @@ import { View, Text, StyleSheet, Button } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { globalStyles } from '../GlobalStyles'
 
-export default function ReviewForm() {
+export default function ReviewForm({ addReview }: any) {
     return (
         <View style={globalStyles.container}>
             <Formik
                 initialValues={{ title: '', body: '', rating: '' }}
-                onSubmit={(values) => { //채워진 내용이 values에 들어있음.
-                    console.log(values);
+                onSubmit={(values, actions) => { //채워진 내용이 values에 들어있음.
+                    // console.log(values);
+                    actions.resetForm(); //만약 해당 폼을 닫지 않고 켜놓은 상태에서 뭔가를 실행하는데 폼은 초기화하고싶을 경우.
+                    addReview(values);
                 }}
             >
                 {(props) => (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity, Modal } from 'react-native'
+import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity, Modal, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { globalStyles } from '../GlobalStyles';
 import Card from '../shared/Card';
 
@@ -13,17 +13,28 @@ export default function Home({ navigation }: any) {
         { key: '2', title: 'Gotta Catch Them All (again)', rating: 4, body: 'lorem ipsum' },
         { key: '3', title: 'Not So "Final" Fantasy', rating: 2, body: 'lorem ipsum' },
     ])
+
+    const addReview = (review: any) => {
+        review.key = Math.random().toString();
+        setReviews((currentReviews) => {
+            return [review, ...currentReviews]
+        });
+        setModalOpen(false);
+    }
+    
     return (
         <View style={globalStyles.container}>
             <Modal visible={modalOpen} animationType='slide'>
-                <View style={styles.modalContent}>
-                    <MaterialIcons name='close' size={24} onPress={() => {setModalOpen(false)}}
-                        // style={[styles.modalToggle, styles.modalClose]}
-                        style={{...styles.modalToggle, ...styles.modalClose}}
-                    />
-                    {/* <Text>Hello from the modal :)</Text> */}
-                    <ReviewForm />
-                </View>
+                <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                    <View style={styles.modalContent}>
+                        <MaterialIcons name='close' size={24} onPress={() => {setModalOpen(false)}}
+                            // style={[styles.modalToggle, styles.modalClose]}
+                            style={{...styles.modalToggle, ...styles.modalClose}}
+                        />
+                        {/* <Text>Hello from the modal :)</Text> */}
+                        <ReviewForm addReview={addReview} />
+                    </View>
+                </TouchableWithoutFeedback>
             </Modal>
 
             <MaterialIcons name='add' size={24} onPress={() => {setModalOpen(true)}} style={styles.modalToggle}/>
