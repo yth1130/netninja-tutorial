@@ -15,7 +15,7 @@ const reviewSchema = Yup.object({
     rating: Yup.string()
         .required()
         .test('is-num-1-5', 'Rating must be a number 1 - 5', (val) => {
-            return parseInt(val!) < 6 && parseInt(val!) > 0;
+            return parseInt(val!) < 6 && parseInt(val!) > 0; //https://stackoverflow.com/questions/54496398/typescript-type-string-undefined-is-not-assignable-to-type-string/54496418
         }),
 });
 
@@ -38,21 +38,27 @@ export default function ReviewForm({ addReview }: any) {
                             placeholder='Review title'
                             onChangeText={props.handleChange('title')} //values에 있는 'title'이 갱신된다.
                             value={props.values.title}
+                            onBlur={props.handleBlur('title')} //realtime validation ??
                         />
+                        <Text style={globalStyles.errorText}>{props.touched.title && props.errors.title}</Text>
                         <TextInput
                             style={globalStyles.input}
                             placeholder='Review body'
                             onChangeText={props.handleChange('body')} //values에 있는 'title'이 갱신된다.
                             value={props.values.body}
                             multiline
+                            onBlur={props.handleBlur('body')}
                         />
+                        <Text style={globalStyles.errorText}>{props.touched.body && props.errors.body}</Text>
                         <TextInput
                             style={globalStyles.input}
                             placeholder='Review (1-5)'
                             onChangeText={props.handleChange('rating')} //values에 있는 'title'이 갱신된다.
                             value={props.values.rating}
                             keyboardType='numeric'
+                            onBlur={props.handleBlur('rating')}
                         />
+                        <Text style={globalStyles.errorText}>{props.touched.rating && props.errors.rating}</Text>
                         <Button title='submit' color='maroon' onPress={()=>{props.handleSubmit()}}/>
                     </View>
 
